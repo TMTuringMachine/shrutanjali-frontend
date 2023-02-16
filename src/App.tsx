@@ -1,10 +1,8 @@
 import React from 'react';
-
+import Router from './routes/routes.index';
 function App() {
   return (
-    <h1 className="text-3xl mt-6 font-bold text-center">
-      Shrutanjali Website Home Page
-    </h1>
+    <Router/>
   );  
 }
 
