@@ -5,13 +5,16 @@ import ScrollToTop from "./components/ScrollToTop";
 
 //providers
 import SnackbarProvider from "./providers/SnackbarProvider";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
   return (
     <div className="w-screen h-screen">
       <SnackbarProvider>
         <ScrollToTop />
-        <Router />
+        <AnimatePresence mode="wait">
+          <Router />
+        </AnimatePresence>
       </SnackbarProvider>
     </div>
   );

@@ -6,9 +6,6 @@ import { Navigate, useRoutes } from "react-router-dom";
 //components
 import LoadingScreen from "../components/LoadingScreen";
 
-//layouts
-import UserLayout from "../layouts/user";
-
 const Loadable = (Component: FunctionComponent) => (props: any) => {
   return (
     <Suspense fallback={<LoadingScreen />}>
@@ -56,3 +53,6 @@ const NotFound = Loadable(lazy(() => import("../components/Page404")));
 //pages
 const LandingPage = Loadable(lazy(() => import("../pages/LandingPage")));
 const Home = Loadable(lazy(() => import("../pages/Home")));
+
+//layouts
+const UserLayout = Loadable(lazy(() => import("../layouts/user")));
