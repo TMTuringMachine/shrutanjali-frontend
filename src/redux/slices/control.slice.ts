@@ -1,4 +1,4 @@
-import { Dispatch, Slice, createSlice } from "@reduxjs/toolkit";
+import { Dispatch, PayloadAction, Slice, createSlice } from "@reduxjs/toolkit";
 // ----------------------------------------------------------------------
 
 interface snackState {
@@ -11,7 +11,7 @@ interface controlState {
   snack: snackState;
 }
 
-const initialState = {
+const initialState: controlState = {
   loading: false,
   snack: {
     text: null,
@@ -23,7 +23,7 @@ const slice: Slice = createSlice({
   name: "control",
   initialState,
   reducers: {
-    showSnackbar(state, action) {
+    showSnackbar(state, action: PayloadAction<snackState>) {
       switch (action.payload.type) {
         case "success":
           state.snack.text = action.payload?.text || "Success";
@@ -48,16 +48,20 @@ const slice: Slice = createSlice({
           state.snack.type = "error";
           break;
       }
+      return state;
     },
-    hideSnackbar(state) {
+    hideSnackbar: (state) => {
       state.snack.text = null;
       state.snack.type = null;
+      return state;
     },
     startLoading(state) {
       state.loading = true;
+      return state;
     },
     stopLoading(state) {
       state.loading = false;
+      return state;
     },
   },
 });
@@ -66,9 +70,5 @@ const slice: Slice = createSlice({
 export default slice.reducer;
 
 // Actions
-export const { hideSnackbar, startLoading, stopLoading } = slice.actions;
-
-export const showSnackbar =
-  (text: string, type = "success") =>
-  (dispatch: Dispatch) =>
-    dispatch(slice.actions.showSnackbar({ text, type }));
+export const { hideSnackbar, startLoading, stopLoading, showSnackbar } =
+  slice.actions;
